@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from http import HTTPStatus
 
 import pytest
@@ -76,7 +76,7 @@ async def test_get_run_lineage_no_operations(
         "v1/runs/lineage",
         headers={"Authorization": f"Bearer {mocked_user.access_token}"},
         params={
-            "since": datetime.now(tz=timezone.utc).isoformat(),
+            "since": datetime.now(tz=UTC).isoformat(),
             "start_node_id": str(run.id),
         },
     )

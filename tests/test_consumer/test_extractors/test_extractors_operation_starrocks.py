@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -37,10 +37,10 @@ from data_rentgen.openlineage.run_facets import (
 
 
 def test_extractors_extract_operation_starrocks_query_started():
-    query_started_at = datetime(2026, 3, 31, 19, 30, 0, 456123, tzinfo=timezone.utc)
+    query_started_at = datetime(2026, 3, 31, 19, 30, 0, 456123, tzinfo=UTC)
     query_id = UUID("019d455f-d088-7d61-bdcd-6a9085a2096a")
 
-    session_creation_time = datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=UTC)
 
     operation = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -114,10 +114,10 @@ def test_extractors_extract_operation_starrocks_query_started():
 def test_extractors_extract_operation_starrocks_query_finished(
     event_type: OpenLineageRunEventType, expected_status: OperationStatusDTO
 ):
-    query_ended_at = datetime(2026, 3, 31, 19, 40, 0, 456123, tzinfo=timezone.utc)
+    query_ended_at = datetime(2026, 3, 31, 19, 40, 0, 456123, tzinfo=UTC)
     query_id = UUID("019d455f-d088-7d61-bdcd-6a9085a2096a")
 
-    session_creation_time = datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=UTC)
 
     operation = OpenLineageRunEvent(
         eventType=event_type,

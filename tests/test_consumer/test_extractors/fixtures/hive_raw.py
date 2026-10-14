@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from packaging.version import Version
@@ -28,7 +28,7 @@ from data_rentgen.openlineage.run_facets import (
 def hive_query_run_event_stop() -> OpenLineageRunEvent:
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
-        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=timezone.utc),
+        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=UTC),
         job=OpenLineageJob(
             namespace="hive://test-hadoop:10000",
             name="createtable_as_select.mydatabase.target_table",
@@ -54,7 +54,7 @@ def hive_query_run_event_stop() -> OpenLineageRunEvent:
                     username="myuser",
                     clientIp="11.22.33.44",
                     sessionId="0ba6765b-3019-4172-b748-63c257158d20",
-                    creationTime=datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc),
+                    creationTime=datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC),
                 ),
                 processing_engine=OpenLineageProcessingEngineRunFacet(
                     version=Version("3.1.3"),

@@ -186,7 +186,7 @@ partial_also = [
 ]
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py312"
 line-length = 120
 extend-exclude = ["mddocs/", "Makefile"]
 
@@ -217,6 +217,11 @@ parametrize-values-row-type = "tuple"
 inline-quotes = "double"
 multiline-quotes = "double"
 docstring-quotes = "double"
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+follow_imports = "silent"
 
 [[tool.mypy.overrides]]
 module=["sqlalchemy_utils.*"]

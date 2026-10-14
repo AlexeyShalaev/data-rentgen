@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -59,7 +59,7 @@ def starrocks_query_run_event_start(
 ) -> OpenLineageRunEvent:
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
-        eventTime=datetime(2026, 3, 31, 19, 30, 0, 456123, tzinfo=timezone.utc),
+        eventTime=datetime(2026, 3, 31, 19, 30, 0, 456123, tzinfo=UTC),
         job=starrocks_session_job,
         run=starrocks_session_run,
     )
@@ -71,7 +71,7 @@ def starrocks_query_run_event_stop(
 ) -> OpenLineageRunEvent:
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
-        eventTime=datetime(2026, 3, 31, 19, 40, 0, 456123, tzinfo=timezone.utc),
+        eventTime=datetime(2026, 3, 31, 19, 40, 0, 456123, tzinfo=UTC),
         job=starrocks_session_job,
         run=starrocks_session_run,
     )

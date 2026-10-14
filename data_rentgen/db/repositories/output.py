@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 from collections.abc import Collection
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Literal
 from uuid import UUID
 
@@ -103,7 +103,7 @@ class OutputRepository(Repository[Output]):
             return []
 
         min_run_created_at = extract_timestamp_from_uuid(min(run_ids))
-        min_created_at = max(min_run_created_at, since.astimezone(timezone.utc))
+        min_created_at = max(min_run_created_at, since.astimezone(UTC))
         where = [
             Output.created_at >= min_created_at,
             Output.run_id == any_(list(run_ids)),  # type: ignore[arg-type]

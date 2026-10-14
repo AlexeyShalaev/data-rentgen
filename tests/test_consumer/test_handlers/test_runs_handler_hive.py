@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -101,10 +101,10 @@ async def test_runs_handler_hive(
 
     session_run = runs[0]
     assert session_run.id == UUID("0197833d-511d-7034-be27-078fb128ca59")  # generated
-    assert session_run.created_at == datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc)
+    assert session_run.created_at == datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC)
     assert session_run.job_id == jobs[0].id
     assert session_run.status == RunStatus.STARTED
-    assert session_run.started_at == datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc)
+    assert session_run.started_at == datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC)
     assert session_run.started_by_user is not None
     assert session_run.started_by_user.name == "myuser"
     assert session_run.start_reason is None
@@ -129,7 +129,7 @@ async def test_runs_handler_hive(
 
     query_operation = operations[0]
     assert query_operation.id == UUID("0197833d-6cec-7609-a80f-8f4e0f8a5b1f")
-    assert query_operation.created_at == datetime(2025, 6, 18, 13, 32, 10, 348000, tzinfo=timezone.utc)
+    assert query_operation.created_at == datetime(2025, 6, 18, 13, 32, 10, 348000, tzinfo=UTC)
     assert query_operation.run_id == session_run.id
     assert query_operation.name == "hive_20250618133205_44f7bc13-4538-42c7-a5be-8edb36c39a45"
     assert query_operation.description == "CREATETABLE_AS_SELECT"
@@ -137,7 +137,7 @@ async def test_runs_handler_hive(
     assert query_operation.status == OperationStatus.SUCCEEDED
     assert query_operation.started_at is None
     assert query_operation.sql_query_id == operation_sql_query.id
-    assert query_operation.ended_at == datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=timezone.utc)
+    assert query_operation.ended_at == datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=UTC)
     assert query_operation.position is None
 
     dataset_query = (
@@ -226,7 +226,7 @@ async def test_runs_handler_hive(
     assert len(inputs) == 1
 
     hive_input = inputs[0]
-    assert hive_input.created_at == datetime(2025, 6, 18, 13, 32, 10, 348000, tzinfo=timezone.utc)
+    assert hive_input.created_at == datetime(2025, 6, 18, 13, 32, 10, 348000, tzinfo=UTC)
     assert hive_input.operation_id == query_operation.id
     assert hive_input.run_id == session_run.id
     assert hive_input.job_id == session_run.job_id
@@ -242,7 +242,7 @@ async def test_runs_handler_hive(
     assert len(outputs) == 1
 
     hive_output = outputs[0]
-    assert hive_output.created_at == datetime(2025, 6, 18, 13, 32, 10, 348000, tzinfo=timezone.utc)
+    assert hive_output.created_at == datetime(2025, 6, 18, 13, 32, 10, 348000, tzinfo=UTC)
     assert hive_output.operation_id == query_operation.id
     assert hive_output.run_id == session_run.id
     assert hive_output.job_id == session_run.job_id
@@ -259,7 +259,7 @@ async def test_runs_handler_hive(
     assert len(column_lineage) == 1
 
     first_column_lineage = column_lineage[0]
-    assert first_column_lineage.created_at == datetime(2025, 6, 18, 13, 32, 10, 348000, tzinfo=timezone.utc)
+    assert first_column_lineage.created_at == datetime(2025, 6, 18, 13, 32, 10, 348000, tzinfo=UTC)
     assert first_column_lineage.operation_id == query_operation.id
     assert first_column_lineage.run_id == session_run.id
     assert first_column_lineage.job_id == session_run.job_id

@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from packaging.version import Version
@@ -24,7 +24,7 @@ from data_rentgen.openlineage.run_facets import (
 
 @pytest.fixture
 def flink_job_run_event_start() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-7fc0-9D69-b1df9dac2c60")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -58,7 +58,7 @@ def flink_job_run_event_start() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def flink_job_run_event_stop() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=UTC)
     run_id = UUID("01908223-0782-7fc0-9D69-b1df9dac2c60")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,

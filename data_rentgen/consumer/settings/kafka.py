@@ -3,7 +3,7 @@
 
 import json
 import textwrap
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, Field, field_validator
@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field, field_validator
 from data_rentgen.consumer.settings.security import KafkaSecurityAnonymousSettings, KafkaSecuritySettings
 
 
-class KafkaCompression(str, Enum):
+class KafkaCompression(StrEnum):
     GZIP = "gzip"
     SNAPPY = "snappy"
     LZ4 = "lz4"

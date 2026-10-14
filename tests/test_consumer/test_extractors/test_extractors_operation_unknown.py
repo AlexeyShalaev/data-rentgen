@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -40,7 +40,7 @@ from data_rentgen.openlineage.run_facets.data_rentgen_run import DataRentgenRunI
 
 
 def test_extractors_extract_operation_unknown():
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     parent_run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
 
@@ -121,7 +121,7 @@ def test_extractors_extract_operation_unknown_finished(
     event_type: OpenLineageRunEventType,
     expected_status: OperationStatusDTO,
 ):
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     parent_run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation = OpenLineageRunEvent(
@@ -203,7 +203,7 @@ def test_extractors_extract_operation_unknown_finished(
 
 
 def test_extractors_extract_operation_unknown_with_explicit_operation_info():
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     operation_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation = OpenLineageRunEvent(
@@ -277,7 +277,7 @@ def test_extractors_extract_operation_unknown_with_explicit_operation_and_run_in
     custom_operation_name: str | None,
     expected_operation_name: str,
 ):
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     operation = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,

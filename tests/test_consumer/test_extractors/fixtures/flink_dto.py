@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID
 
 import pytest
@@ -60,10 +60,10 @@ def extracted_flink_job_run(
         id=UUID("01908223-0782-7fc0-9d69-b1df9dac2c60"),
         job=extracted_flink_job,
         status=RunStatusDTO.SUCCEEDED,
-        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
         start_reason=None,
         user=None,
-        ended_at=datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=timezone.utc),
+        ended_at=datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=UTC),
         external_id="b825f524-49d6-4dd8-bffd-3e5742c528d0",
         attempt=None,
         running_log_url="http://flink-host:18081/#/job/running/b825f524-49d6-4dd8-bffd-3e5742c528d0",
@@ -82,8 +82,8 @@ def extracted_flink_job_operation(
         run=extracted_flink_job_run,
         status=OperationStatusDTO.SUCCEEDED,
         type=OperationTypeDTO.BATCH,
-        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=UTC),
     )
 
 

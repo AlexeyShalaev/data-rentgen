@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -96,14 +96,14 @@ async def test_runs_handler_starrocks(
 
     session_run = runs[0]
     assert session_run.id == UUID("019d455f-cf2a-7b1e-92d4-8f5c3e9a7b2d")
-    assert session_run.created_at == datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=timezone.utc)
+    assert session_run.created_at == datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=UTC)
     assert session_run.job_id == jobs[0].id
     assert session_run.status == RunStatus.SUCCEEDED
-    assert session_run.started_at == datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=timezone.utc)
+    assert session_run.started_at == datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=UTC)
     assert session_run.started_by_user is not None
     assert session_run.started_by_user.name == "myuser"
     assert session_run.start_reason is None
-    assert session_run.ended_at == datetime(2026, 3, 31, 19, 40, 0, 456000, tzinfo=timezone.utc)
+    assert session_run.ended_at == datetime(2026, 3, 31, 19, 40, 0, 456000, tzinfo=UTC)
     assert session_run.external_id is None
     assert session_run.running_log_url is None
     assert session_run.persistent_log_url is None
@@ -124,15 +124,15 @@ async def test_runs_handler_starrocks(
 
     query_operation = operations[0]
     assert query_operation.id == UUID("019d455f-d088-7d61-bdcd-6a9085a2096a")
-    assert query_operation.created_at == datetime(2026, 3, 31, 19, 30, 0, 456000, tzinfo=timezone.utc)
+    assert query_operation.created_at == datetime(2026, 3, 31, 19, 30, 0, 456000, tzinfo=UTC)
     assert query_operation.run_id == session_run.id
     assert query_operation.name == "insert_query"
     assert query_operation.description is None
     assert query_operation.type == OperationType.BATCH
     assert query_operation.status == OperationStatus.SUCCEEDED
-    assert query_operation.started_at == datetime(2026, 3, 31, 19, 30, 0, 456000, tzinfo=timezone.utc)
+    assert query_operation.started_at == datetime(2026, 3, 31, 19, 30, 0, 456000, tzinfo=UTC)
     assert query_operation.sql_query_id == operation_sql_query.id
-    assert query_operation.ended_at == datetime(2026, 3, 31, 19, 40, 0, 456000, tzinfo=timezone.utc)
+    assert query_operation.ended_at == datetime(2026, 3, 31, 19, 40, 0, 456000, tzinfo=UTC)
     assert query_operation.position is None
 
     dataset_query = (
@@ -177,7 +177,7 @@ async def test_runs_handler_starrocks(
     assert len(inputs) == 1
 
     starrocks_input = inputs[0]
-    assert starrocks_input.created_at == datetime(2026, 3, 31, 19, 30, 0, 456000, tzinfo=timezone.utc)
+    assert starrocks_input.created_at == datetime(2026, 3, 31, 19, 30, 0, 456000, tzinfo=UTC)
     assert starrocks_input.operation_id == query_operation.id
     assert starrocks_input.run_id == session_run.id
     assert starrocks_input.job_id == session_run.job_id
@@ -193,7 +193,7 @@ async def test_runs_handler_starrocks(
     assert len(outputs) == 1
 
     starrocks_output = outputs[0]
-    assert starrocks_output.created_at == datetime(2026, 3, 31, 19, 30, 0, 456000, tzinfo=timezone.utc)
+    assert starrocks_output.created_at == datetime(2026, 3, 31, 19, 30, 0, 456000, tzinfo=UTC)
     assert starrocks_output.operation_id == query_operation.id
     assert starrocks_output.run_id == session_run.id
     assert starrocks_output.job_id == session_run.job_id

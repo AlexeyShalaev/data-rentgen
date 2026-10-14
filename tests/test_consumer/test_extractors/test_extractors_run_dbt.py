@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from packaging.version import Version
@@ -35,7 +35,7 @@ from data_rentgen.openlineage.run_facets.run_tags import OpenLineageRunTagsFacet
 
 
 def test_extractors_extract_run_dbt():
-    now = datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=timezone.utc)
+    now = datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventTime=now,
@@ -98,7 +98,7 @@ def test_extractors_extract_run_dbt():
 
 def test_extractors_extract_run_dbt_openlineage_1_34_plus():
     # https://github.com/OpenLineage/OpenLineage/pull/3738
-    now = datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=timezone.utc)
+    now = datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventTime=now,
@@ -164,7 +164,7 @@ def test_extractors_extract_run_dbt_openlineage_1_34_plus():
 
 def test_extractors_extract_run_dbt_openlineage_1_38_plus():
     # https://github.com/OpenLineage/OpenLineage/pull/3980
-    now = datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=timezone.utc)
+    now = datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventTime=now,
@@ -263,7 +263,7 @@ def test_extractors_extract_run_dbt_openlineage_1_38_plus():
 def test_extractors_extract_run_dbt_openlineage_with_tags(model_tag: str, expected_tag_value: TagValueDTO):
     # https://github.com/OpenLineage/OpenLineage/pull/3471
     # https://github.com/OpenLineage/OpenLineage/pull/4022
-    now = datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=timezone.utc)
+    now = datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventTime=now,

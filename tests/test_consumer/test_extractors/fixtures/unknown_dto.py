@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID
 
 import pytest
@@ -48,8 +48,8 @@ def extracted_unknown_run(
         id=UUID("01908224-8410-79a2-8de6-a769ad6944c9"),
         job=extracted_unknown_job,
         status=RunStatusDTO.SUCCEEDED,
-        started_at=datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=UTC),
     )
 
 
@@ -63,8 +63,8 @@ def extracted_unknown_operation(
         run=extracted_unknown_run,
         status=OperationStatusDTO.SUCCEEDED,
         type=OperationTypeDTO.BATCH,
-        started_at=datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=UTC),
     )
 
 

@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID
 
 import pytest
@@ -50,7 +50,7 @@ def extracted_starrocks_run(
         id=UUID("019d455f-cf2a-7b1e-92d4-8f5c3e9a7b2d"),
         job=extracted_starrocks_job,
         status=RunStatusDTO.STARTED,
-        started_at=datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=timezone.utc),
+        started_at=datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=UTC),
         start_reason=None,
         user=extracted_user,
         ended_at=None,
@@ -73,8 +73,8 @@ def extracted_starrocks_operation(
         type=OperationTypeDTO.BATCH,
         position=None,
         status=OperationStatusDTO.SUCCEEDED,
-        started_at=datetime(2026, 3, 31, 19, 30, 0, 456123, tzinfo=timezone.utc),
-        ended_at=datetime(2026, 3, 31, 19, 40, 0, 456123, tzinfo=timezone.utc),
+        started_at=datetime(2026, 3, 31, 19, 30, 0, 456123, tzinfo=UTC),
+        ended_at=datetime(2026, 3, 31, 19, 40, 0, 456123, tzinfo=UTC),
         sql_query=SQLQueryDTO(query="INSERT INTO users_backup SELECT * FROM users WHERE active = true"),
     )
 

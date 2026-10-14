@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID
 
 import pytest
@@ -93,13 +93,13 @@ def extracted_airflow_dag_run(
         id=UUID("01908223-0782-79b8-9495-b1c38aaee839"),
         job=extracted_airflow_dag_job,
         status=RunStatusDTO.SUCCEEDED,
-        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
         start_reason=RunStartReasonDTO.MANUAL,
         user=UserDTO(
             name="myuser",
             id=None,
         ),
-        ended_at=datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=timezone.utc),
+        ended_at=datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=UTC),
         external_id="manual__2024-07-05T09:04:13:979349+00:00",
         persistent_log_url="http://airflow-host:8081/dags/mydag/grid?dag_run_id=manual__2024-07-05T09%3A04%3A13%3A979349%2B00%3A00",
     )
@@ -113,13 +113,13 @@ def extracted_airflow_task1_run(
         id=UUID("01908223-0782-7fc0-9d69-b1df9dac2c60"),
         job=extracted_airflow_task1_job,
         status=RunStatusDTO.SUCCEEDED,
-        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
         start_reason=RunStartReasonDTO.MANUAL,
         user=UserDTO(
             name="myuser",
             id=None,
         ),
-        ended_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+        ended_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
         external_id="manual__2024-07-05T09:04:13:979349+00:00",
         attempt="1",
         persistent_log_url=(
@@ -149,8 +149,8 @@ def extracted_airflow_task1_operation(
         run=extracted_airflow_task1_run,
         status=OperationStatusDTO.SUCCEEDED,
         type=OperationTypeDTO.BATCH,
-        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
     )
 
 

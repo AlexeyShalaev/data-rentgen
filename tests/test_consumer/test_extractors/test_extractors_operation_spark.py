@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -37,7 +37,7 @@ from data_rentgen.openlineage.run_facets import (
 
 
 def test_extractors_extract_operation_spark_job_no_details():
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910c-70d24f2898b1")
 
@@ -116,7 +116,7 @@ def test_extractors_extract_operation_spark_job_with_details(
     job_group: str | None,
     job_call_site: str | None,
 ):
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
 
@@ -180,7 +180,7 @@ def test_extractors_extract_operation_spark_job_with_details(
 
 
 def test_extractors_extract_operation_spark_job_name_contains_newlines():
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910c-70d24f2898b1")
 
@@ -252,7 +252,7 @@ def test_extractors_extract_operation_spark_job_finished(
     event_type: OpenLineageRunEventType,
     expected_status: OperationStatusDTO,
 ):
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     operation = OpenLineageRunEvent(
@@ -338,7 +338,7 @@ def test_extractors_extract_operation_spark_job_sql_query(
     sql_query: str,
     expected_query: str,
 ):
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910c-70d24f2898b1")
 

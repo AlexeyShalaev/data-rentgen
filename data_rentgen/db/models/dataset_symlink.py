@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2024-present MTS PJSC
 # SPDX-License-Identifier: Apache-2.0
-from enum import Enum
+from enum import StrEnum
 
 from sqlalchemy import BigInteger, ForeignKey, MetaData, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -13,7 +13,7 @@ class _ViewBase(DeclarativeBase):
     metadata = _view_metadata
 
 
-class DatasetSymlinkType(str, Enum):
+class DatasetSymlinkType(StrEnum):
     METASTORE = "METASTORE"
     WAREHOUSE = "WAREHOUSE"
 

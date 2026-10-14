@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -292,7 +292,7 @@ def test_extractors_extract_batch_spark_strip_hdfs_partitions(extracted_hdfs_dat
     """
     There is two datasets name in event. They should be union into one, excluding partition.
     """
-    event_time = datetime(2024, 7, 5, 9, 7, 9, 849000, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 7, 9, 849000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910c-70d24f2898b1")
     event = OpenLineageRunEvent(

@@ -8,7 +8,7 @@ import asyncio
 import logging
 import sys
 from argparse import ArgumentParser
-from enum import Enum
+from enum import StrEnum
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -20,7 +20,7 @@ from data_rentgen.logging import setup_logging
 logger = logging.getLogger(__name__)
 
 
-class Depth(str, Enum):
+class Depth(StrEnum):
     DAY = "day"
     WEEK = "week"
     MONTH = "month"

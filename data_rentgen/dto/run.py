@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from enum import Enum, IntEnum
+from enum import IntEnum, StrEnum
 from uuid import UUID
 
 from data_rentgen.dto.job import JobDTO
@@ -22,7 +22,7 @@ class RunStatusDTO(IntEnum):
     KILLED = 3
 
 
-class RunStartReasonDTO(str, Enum):
+class RunStartReasonDTO(StrEnum):
     MANUAL = "MANUAL"
     AUTOMATIC = "AUTOMATIC"
 

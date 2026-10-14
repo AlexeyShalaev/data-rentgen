@@ -1,4 +1,4 @@
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from http import HTTPStatus
 
 import pytest
@@ -77,7 +77,7 @@ async def test_get_dataset_lineage_no_relations(
         "v1/datasets/lineage",
         headers={"Authorization": f"Bearer {mocked_user.access_token}"},
         params={
-            "since": datetime.now(tz=timezone.utc).isoformat(),
+            "since": datetime.now(tz=UTC).isoformat(),
             "start_node_id": dataset.id,
         },
     )

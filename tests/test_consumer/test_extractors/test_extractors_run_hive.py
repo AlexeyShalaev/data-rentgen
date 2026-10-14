@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from packaging.version import Version
 from uuid6 import UUID
@@ -41,10 +41,10 @@ from data_rentgen.openlineage.run_facets.parent_run import (
 
 
 def test_extractors_extract_run_hive():
-    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC)
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
-        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=timezone.utc),
+        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=UTC),
         job=OpenLineageJob(
             namespace="hive://test-hadoop:10000",
             name="createtable_as_select.mydatabase.target_table",
@@ -109,10 +109,10 @@ def test_extractors_extract_run_hive():
 
 
 def test_extractors_extract_run_hive_custom_job_name():
-    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC)
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
-        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=timezone.utc),
+        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=UTC),
         job=OpenLineageJob(
             namespace="hive://test-hadoop:10000",
             name="my_job_name",
@@ -176,10 +176,10 @@ def test_extractors_extract_run_hive_custom_job_name():
 
 def test_extractors_extract_run_hive_openlineage_1_34():
     # Before https://github.com/OpenLineage/OpenLineage/pull/3789
-    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC)
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
-        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=timezone.utc),
+        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=UTC),
         job=OpenLineageJob(
             namespace="hive://test-hadoop:10000",
             name="createtable_as_select.mydatabase.target_table",
@@ -235,11 +235,11 @@ def test_extractors_extract_run_hive_openlineage_1_34():
 
 
 def test_extractors_extract_run_hive_with_parent_job():
-    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC)
     parent_run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
-        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=timezone.utc),
+        eventTime=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=UTC),
         job=OpenLineageJob(
             namespace="hive://test-hadoop:10000",
             name="createtable_as_select.mydatabase.target_table",

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from packaging.version import Version
 from uuid6 import UUID
@@ -34,7 +34,7 @@ from data_rentgen.openlineage.run_facets import (
 
 
 def test_extractors_extract_run_flink():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0e9b-7c52-9856-6cecfc842610")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -96,7 +96,7 @@ def test_extractors_extract_run_flink():
 
 
 def test_extractors_extract_run_flink_before_openlineage_1_34():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0e9b-7c52-9856-6cecfc842610")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,

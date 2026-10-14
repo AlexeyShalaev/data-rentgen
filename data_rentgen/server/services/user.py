@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2024-present MTS PJSC
 # SPDX-License-Identifier: Apache-2.0
 from collections.abc import Callable, Coroutine
-from enum import Enum
+from enum import StrEnum
 from typing import Annotated, Any
 
 from fastapi import Depends, Request
@@ -15,7 +15,7 @@ from data_rentgen.server.services import get_auth_provider, get_personal_token_p
 from data_rentgen.services.uow import UnitOfWork
 
 
-class PersonalTokenPolicy(str, Enum):
+class PersonalTokenPolicy(StrEnum):
     ALLOW = "allow"
     DENY = "deny"
     REQUIRE = "require"

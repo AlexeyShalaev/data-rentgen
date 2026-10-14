@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from enum import Enum, IntEnum
+from enum import IntEnum, StrEnum
 from uuid import UUID
 
 from data_rentgen.dto.run import RunDTO
@@ -13,7 +13,7 @@ from data_rentgen.dto.sql_query import SQLQueryDTO
 from data_rentgen.utils.uuid import extract_timestamp_from_uuid
 
 
-class OperationTypeDTO(str, Enum):
+class OperationTypeDTO(StrEnum):
     BATCH = "BATCH"
     STREAMING = "STREAMING"
 

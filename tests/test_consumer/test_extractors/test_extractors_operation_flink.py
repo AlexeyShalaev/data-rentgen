@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -34,7 +34,7 @@ from data_rentgen.openlineage.run_facets import (
 
 
 def test_extractors_extract_operation_flink_job():
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
 
     operation = OpenLineageRunEvent(
@@ -104,7 +104,7 @@ def test_extractors_extract_operation_flink_job_finished(
     event_type: OpenLineageRunEventType,
     expected_status: OperationStatusDTO,
 ):
-    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     operation = OpenLineageRunEvent(
         eventType=event_type,

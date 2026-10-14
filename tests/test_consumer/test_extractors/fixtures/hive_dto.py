@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID
 
 import pytest
@@ -72,7 +72,7 @@ def extracted_hive_run(
         id=UUID("0197833d-511d-7034-be27-078fb128ca59"),
         job=extracted_hive_job,
         status=RunStatusDTO.STARTED,
-        started_at=datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc),
+        started_at=datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC),
         start_reason=None,
         user=extracted_user,
         ended_at=None,
@@ -96,7 +96,7 @@ def extracted_hive_operation(
         position=None,
         status=OperationStatusDTO.SUCCEEDED,
         started_at=None,
-        ended_at=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=timezone.utc),
+        ended_at=datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=UTC),
         sql_query=SQLQueryDTO(query="create table mydatabase.target_table as select * from mydatabase.source_table"),
     )
 

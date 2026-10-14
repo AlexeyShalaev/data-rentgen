@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import date
-from enum import Enum
+from enum import StrEnum
 from uuid import UUID
 
 from fastapi import Query
@@ -31,7 +31,7 @@ class PersonalTokenResetRequestV1(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
-class PersonalTokenScopeV1(str, Enum):
+class PersonalTokenScopeV1(StrEnum):
     ALL_READ = "all:read"
     ALL_WRITE = "all:write"
 

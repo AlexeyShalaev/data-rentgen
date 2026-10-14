@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -101,13 +101,13 @@ async def test_runs_handler_dbt(
 
     run = runs[0]
     assert run.id == UUID("0196eccd-8aa4-7274-9116-824575596aaf")
-    assert run.created_at == datetime(2025, 5, 20, 8, 26, 55, 524000, tzinfo=timezone.utc)
+    assert run.created_at == datetime(2025, 5, 20, 8, 26, 55, 524000, tzinfo=UTC)
     assert run.job_id == jobs[0].id
     assert run.status == RunStatus.SUCCEEDED
-    assert run.started_at == datetime(2025, 5, 20, 8, 26, 55, 524789, tzinfo=timezone.utc)
+    assert run.started_at == datetime(2025, 5, 20, 8, 26, 55, 524789, tzinfo=UTC)
     assert run.started_by_user is None
     assert run.start_reason is None
-    assert run.ended_at == datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=timezone.utc)
+    assert run.ended_at == datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=UTC)
     assert run.external_id == "93c69fcd-10d0-4639-a4f8-95be0da4476b"
     assert run.running_log_url is None
     assert run.persistent_log_url is None
@@ -130,15 +130,15 @@ async def test_runs_handler_dbt(
 
     operation = operations[0]
     assert operation.id == UUID("0196eccd-ebdc-70e3-b532-6e66f541ba29")
-    assert operation.created_at == datetime(2025, 5, 20, 8, 27, 20, 412000, tzinfo=timezone.utc)
+    assert operation.created_at == datetime(2025, 5, 20, 8, 27, 20, 412000, tzinfo=UTC)
     assert operation.run_id == run.id
     assert operation.name == "demo_schema.demo_project.target_table"
     assert operation.group == "MODEL"
     assert operation.type == OperationType.BATCH
     assert operation.status == OperationStatus.SUCCEEDED
-    assert operation.started_at == datetime(2025, 5, 20, 8, 27, 16, 601799, tzinfo=timezone.utc)
+    assert operation.started_at == datetime(2025, 5, 20, 8, 27, 16, 601799, tzinfo=UTC)
     assert operation.sql_query_id == sql_query.id
-    assert operation.ended_at == datetime(2025, 5, 20, 8, 27, 18, 581235, tzinfo=timezone.utc)
+    assert operation.ended_at == datetime(2025, 5, 20, 8, 27, 18, 581235, tzinfo=UTC)
     assert operation.position is None
     assert operation.description is None
 
@@ -192,7 +192,7 @@ async def test_runs_handler_dbt(
     assert len(inputs) == 1
 
     kafka_input = inputs[0]
-    assert kafka_input.created_at == datetime(2025, 5, 20, 8, 27, 20, 412000, tzinfo=timezone.utc)
+    assert kafka_input.created_at == datetime(2025, 5, 20, 8, 27, 20, 412000, tzinfo=UTC)
     assert kafka_input.operation_id == operation.id
     assert kafka_input.run_id == run.id
     assert kafka_input.job_id == run.job_id
@@ -208,7 +208,7 @@ async def test_runs_handler_dbt(
     assert len(outputs) == 1
 
     kafka_output = outputs[0]
-    assert kafka_output.created_at == datetime(2025, 5, 20, 8, 27, 20, 412000, tzinfo=timezone.utc)
+    assert kafka_output.created_at == datetime(2025, 5, 20, 8, 27, 20, 412000, tzinfo=UTC)
     assert kafka_output.operation_id == operation.id
     assert kafka_output.run_id == run.id
     assert kafka_output.job_id == run.job_id
@@ -225,7 +225,7 @@ async def test_runs_handler_dbt(
     assert len(column_lineage) == 1
 
     final_column_lineage = column_lineage[0]
-    assert final_column_lineage.created_at == datetime(2025, 5, 20, 8, 27, 20, 412000, tzinfo=timezone.utc)
+    assert final_column_lineage.created_at == datetime(2025, 5, 20, 8, 27, 20, 412000, tzinfo=UTC)
     assert final_column_lineage.operation_id == operation.id
     assert final_column_lineage.run_id == run.id
     assert final_column_lineage.job_id == run.job_id

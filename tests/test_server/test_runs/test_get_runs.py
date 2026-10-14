@@ -1,4 +1,4 @@
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from http import HTTPStatus
 
 import pytest
@@ -37,7 +37,7 @@ async def test_get_runs_by_run_id_until_less_than_since(
     test_client: AsyncClient,
     mocked_user: MockedUser,
 ):
-    since = datetime.now(tz=timezone.utc)
+    since = datetime.now(tz=UTC)
     until = since - timedelta(days=1)
     response = await test_client.get(
         "v1/runs",

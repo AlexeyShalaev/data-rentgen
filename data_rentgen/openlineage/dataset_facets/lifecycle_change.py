@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2024-present MTS PJSC
 # SPDX-License-Identifier: Apache-2.0
 
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import Field
 
@@ -11,7 +11,7 @@ from data_rentgen.openlineage.dataset_facets.base import (
 )
 
 
-class OpenLineageDatasetLifecycleStateChange(str, Enum):
+class OpenLineageDatasetLifecycleStateChange(StrEnum):
     """Lifecycle state change type.
     See [LifecycleStateChangeDatasetFacet](https://github.com/OpenLineage/OpenLineage/blob/main/spec/facets/LifecycleStateChangeDatasetFacet.json).
     """

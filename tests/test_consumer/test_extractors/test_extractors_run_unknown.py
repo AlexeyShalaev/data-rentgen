@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -64,7 +64,7 @@ def test_extractors_extract_run_unknown(
     raw_job_type: OpenLineageJobTypeJobFacet | None,
     extracted_job_type: JobTypeDTO | None,
 ):
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -182,7 +182,7 @@ def test_extractors_extract_run_with_status(
     event_type: OpenLineageRunEventType,
     expected_status: RunStatusDTO,
 ):
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     run = OpenLineageRunEvent(
         eventType=event_type,
@@ -215,7 +215,7 @@ def test_extractors_extract_run_with_status(
 
 
 def test_extractors_extract_run_unknown_with_parent():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     parent_run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     run = OpenLineageRunEvent(
@@ -287,7 +287,7 @@ def test_extractors_extract_run_unknown_with_parent():
 
 
 def test_extractors_extract_run_unknown_with_custom_run_info():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908225-1fd7-746b-910C-70d24f2898b1")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,

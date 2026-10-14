@@ -6,14 +6,14 @@ from __future__ import annotations
 import json
 from collections.abc import Iterable
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from uuid import UUID
 
 from data_rentgen.dto.dataset import DatasetDTO
 from data_rentgen.utils.uuid import generate_static_uuid
 
 
-class DatasetSymlinkTypeDTO(str, Enum):
+class DatasetSymlinkTypeDTO(StrEnum):
     METASTORE = "METASTORE"
     WAREHOUSE = "WAREHOUSE"
 

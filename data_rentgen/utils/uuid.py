@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import secrets
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from hashlib import sha1
 from uuid import NAMESPACE_URL, uuid5
 from uuid import UUID as BaseUUID  # noqa: N811
@@ -52,7 +52,7 @@ def generate_incremental_uuid(instant: datetime, data: str) -> NewUUID:
     * https://github.com/oittaa/uuid6-python/blob/4f879849178b8a7a564f7cb76c3f7a6e5228d9ed/src/uuid6/__init__.py#L46-L51
     """  # noqa: E501
 
-    instant_utc = instant.astimezone(timezone.utc)
+    instant_utc = instant.astimezone(UTC)
     timestamp_ms = int(instant_utc.timestamp() * 1000)
 
     # generate the rest of bytes using some hash.
@@ -114,5 +114,5 @@ def extract_timestamp_from_uuid(uuid: BaseUUID) -> datetime:
         msg = "Only UUIDv6+ are supported"
         raise ValueError(msg)
     if uuid.version == 8:  # noqa: PLR2004
-        return datetime.fromtimestamp(uuid.time / 1_000_000_000, tz=timezone.utc)
-    return datetime.fromtimestamp(uuid.time / 1_000, tz=timezone.utc)
+        return datetime.fromtimestamp(uuid.time / 1_000_000_000, tz=UTC)
+    return datetime.fromtimestamp(uuid.time / 1_000, tz=UTC)

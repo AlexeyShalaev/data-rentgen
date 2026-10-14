@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from packaging.version import Version
@@ -30,7 +30,7 @@ from data_rentgen.openlineage.run_facets import (
 
 @pytest.fixture
 def airflow_dag_run_event_start() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -59,8 +59,8 @@ def airflow_dag_run_event_start() -> OpenLineageRunEvent:
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                 ),
             ),
@@ -70,7 +70,7 @@ def airflow_dag_run_event_start() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def airflow_dag_run_event_stop() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 8, 5, 691973, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -101,7 +101,7 @@ def airflow_dag_run_event_stop() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def airflow_task1_run_event_start() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-7fc0-9d69-b1df9dac2c60")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -130,8 +130,8 @@ def airflow_task1_run_event_start() -> OpenLineageRunEvent:
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -151,7 +151,7 @@ def airflow_task1_run_event_start() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def airflow_task1_run_event_stop() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-7fc0-9d69-b1df9dac2c60")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,

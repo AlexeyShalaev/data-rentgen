@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from uuid6 import UUID
 
@@ -36,7 +36,7 @@ from data_rentgen.openlineage.run_facets import (
 
 
 def test_extractors_extract_operation_model():
-    now = datetime(2025, 5, 20, 8, 27, 18, 581235, tzinfo=timezone.utc)
+    now = datetime(2025, 5, 20, 8, 27, 18, 581235, tzinfo=UTC)
     run_id = UUID("0196eccd-8aa4-7274-9116-824575596aaf")
     operation_id = UUID("0196eccd-ebdc-70e3-b532-6e66f541ba29")
     run = OpenLineageRunEvent(

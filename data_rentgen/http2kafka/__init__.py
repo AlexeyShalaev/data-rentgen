@@ -7,7 +7,6 @@ from contextlib import asynccontextmanager
 import anyio
 from devtools import pformat
 from fastapi import FastAPI
-from faststream._internal._compat import ExceptionGroup
 from faststream.kafka import KafkaBroker
 
 import data_rentgen
@@ -54,7 +53,7 @@ def broker_factory(settings: Http2KafkaApplicationSettings) -> KafkaBroker:
     return KafkaBroker(
         bootstrap_servers=settings.kafka.bootstrap_servers,
         security=settings.kafka.security.to_security(),
-        compression_type=settings.kafka.compression.value if settings.kafka.compression else None,
+        compression_type=settings.kafka.compression.value if settings.kafka.compression else None,  # type: ignore[arg-type]
         client_id=f"data-rentgen-http2kafka:{data_rentgen.__version__}",
         logger=logger,
         **settings.kafka.security.extra_broker_kwargs(),

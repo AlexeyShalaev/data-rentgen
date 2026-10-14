@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from unittest.mock import Mock
 
 import pytest
@@ -138,7 +138,7 @@ def test_extractors_extract_input(
     )
     operation = Mock(spec=OperationDTO)
     event = Mock(spec=OpenLineageRunEvent)
-    operation.created_at = event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    operation.created_at = event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
 
     assert GenericExtractor().extract_input(operation, input, event) == (
         InputDTO(
@@ -168,10 +168,10 @@ def test_extractors_extract_input_for_long_operations():
 
     # operation was created long time ago
     operation = Mock(spec=OperationDTO)
-    operation.created_at = datetime(2024, 7, 5, tzinfo=timezone.utc)
+    operation.created_at = datetime(2024, 7, 5, tzinfo=UTC)
 
     event = Mock(spec=OpenLineageRunEvent)
-    event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
 
     assert GenericExtractor().extract_input(operation, input_, event) == (
         InputDTO(
@@ -235,7 +235,7 @@ def test_extractors_extract_output_batch_with_lifecycle(
     )
     operation = Mock(spec=OperationDTO)
     event = Mock(spec=OpenLineageRunEvent)
-    operation.created_at = event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    operation.created_at = event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
 
     assert GenericExtractor().extract_output(operation, output, event) == (
         OutputDTO(
@@ -291,7 +291,7 @@ def test_extractors_extract_output_batch_with_sql(
     operation.sql_query = SQLQueryDTO(query=sql_query)
 
     event = Mock(spec=OpenLineageRunEvent)
-    operation.created_at = event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    operation.created_at = event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
 
     assert GenericExtractor().extract_output(operation, output, event) == (
         OutputDTO(
@@ -320,10 +320,10 @@ def test_extractors_extract_output_for_long_running_operations():
     # operation is streaming and created long time ago
     operation = Mock(spec=OperationDTO)
     operation.sql_query = None
-    operation.created_at = datetime(2024, 7, 5, tzinfo=timezone.utc)
+    operation.created_at = datetime(2024, 7, 5, tzinfo=UTC)
 
     event = Mock(spec=OpenLineageRunEvent)
-    event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    event.eventTime = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
 
     assert GenericExtractor().extract_output(operation, output, event) == (
         OutputDTO(

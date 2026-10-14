@@ -10,7 +10,6 @@ import anyio
 from devtools import pformat
 from fast_depends import dependency_provider
 from faststream import ContextRepo, FastStream
-from faststream._internal._compat import ExceptionGroup
 from faststream.asgi import AsgiFastStream, AsgiResponse, get
 from faststream.asgi.types import ASGIApp, Receive, Scope, Send
 from faststream.kafka import KafkaBroker
@@ -74,7 +73,7 @@ def broker_factory(settings: ConsumerApplicationSettings) -> KafkaBroker:
     broker = KafkaBroker(
         bootstrap_servers=settings.kafka.bootstrap_servers,
         security=settings.kafka.security.to_security(),
-        compression_type=settings.kafka.compression.value if settings.kafka.compression else None,
+        compression_type=settings.kafka.compression.value if settings.kafka.compression else None,  # type: ignore[arg-type]
         client_id=f"data-rentgen-consumer:{data_rentgen.__version__}",
         logger=logger,
         middlewares=middlewares,

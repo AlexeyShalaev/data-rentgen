@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from datetime import datetime
-from enum import Enum, IntEnum, IntFlag
+from enum import IntEnum, IntFlag, StrEnum
 from typing import Literal
 from uuid import UUID
 
@@ -16,7 +16,7 @@ from data_rentgen.server.schemas.v1.operation import OperationResponseV1
 from data_rentgen.server.schemas.v1.run import RunResponseV1
 
 
-class LineageEntityKindV1(str, Enum):
+class LineageEntityKindV1(StrEnum):
     JOB = "JOB"
     RUN = "RUN"
     OPERATION = "OPERATION"
@@ -26,7 +26,7 @@ class LineageEntityKindV1(str, Enum):
         return self.value
 
 
-class LineageDirectionV1(str, Enum):
+class LineageDirectionV1(StrEnum):
     DOWNSTREAM = "DOWNSTREAM"
     UPSTREAM = "UPSTREAM"
     BOTH = "BOTH"

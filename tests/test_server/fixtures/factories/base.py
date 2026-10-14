@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from random import randrange
 from string import ascii_letters, digits, punctuation
 
@@ -16,7 +16,7 @@ def random_datetime(
     end: datetime | None = None,
 ) -> datetime:
     if not start:
-        start = datetime.fromtimestamp(0, tz=timezone.utc)
+        start = datetime.fromtimestamp(0, tz=UTC)
     if not end:
-        end = datetime.now(tz=timezone.utc)
+        end = datetime.now(tz=UTC)
     return datetime.fromtimestamp(randrange(int(start.timestamp()), int(end.timestamp())), tz=start.tzinfo)

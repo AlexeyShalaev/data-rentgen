@@ -9,7 +9,7 @@ import logging
 import sys
 from argparse import ArgumentParser
 from datetime import UTC, date, datetime
-from enum import Enum
+from enum import StrEnum
 
 from dateutil.parser import isoparse
 from dateutil.relativedelta import relativedelta
@@ -33,7 +33,7 @@ PARTITIONED_TABLES = [
 ]
 
 
-class Granularity(str, Enum):
+class Granularity(StrEnum):
     DAY = "day"
     MONTH = "month"
     YEAR = "year"

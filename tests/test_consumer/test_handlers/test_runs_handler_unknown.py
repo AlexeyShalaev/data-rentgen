@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -98,11 +98,11 @@ async def test_runs_handler_unknown(
 
     run = runs[0]
     assert run.id == UUID("01908224-8410-79a2-8de6-a769ad6944c9")
-    assert run.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=timezone.utc)
+    assert run.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=UTC)
     assert run.job_id == job.id
     assert run.status == RunStatus.SUCCEEDED
-    assert run.started_at == datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
-    assert run.ended_at == datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=timezone.utc)
+    assert run.started_at == datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
+    assert run.ended_at == datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=UTC)
     assert run.started_by_user is None
     assert run.start_reason is None
     assert run.external_id is None
@@ -116,13 +116,13 @@ async def test_runs_handler_unknown(
 
     operation = operations[0]
     assert operation.id == UUID("01908224-8410-79a2-8de6-a769ad6944c9")
-    assert operation.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=timezone.utc)
+    assert operation.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=UTC)
     assert operation.run_id == run.id
     assert operation.name == "somejob"
     assert operation.type == OperationType.BATCH
     assert operation.status == OperationStatus.SUCCEEDED
     assert operation.started_at is None  # first event didn't have any inputs or outputs
-    assert operation.ended_at == datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=timezone.utc)
+    assert operation.ended_at == datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=UTC)
     assert operation.position is None
     assert operation.description is None
 
@@ -182,7 +182,7 @@ async def test_runs_handler_unknown(
     assert len(inputs) == 1
 
     hive_input = inputs[0]
-    assert hive_input.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=timezone.utc)
+    assert hive_input.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=UTC)
     assert hive_input.operation_id == operation.id
     assert hive_input.run_id == run.id
     assert hive_input.job_id == run.job_id
@@ -198,7 +198,7 @@ async def test_runs_handler_unknown(
     assert len(outputs) == 1
 
     clickhouse_output = outputs[0]
-    assert clickhouse_output.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=timezone.utc)
+    assert clickhouse_output.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=UTC)
     assert clickhouse_output.operation_id == operation.id
     assert clickhouse_output.run_id == run.id
     assert clickhouse_output.job_id == run.job_id
@@ -218,7 +218,7 @@ async def test_runs_handler_unknown(
     assert len(column_lineage) == 2
 
     first_event_column_lineage = column_lineage[0]
-    assert first_event_column_lineage.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=timezone.utc)
+    assert first_event_column_lineage.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=UTC)
     assert first_event_column_lineage.operation_id == operation.id
     assert first_event_column_lineage.run_id == run.id
     assert first_event_column_lineage.job_id == run.job_id
@@ -226,7 +226,7 @@ async def test_runs_handler_unknown(
     assert first_event_column_lineage.target_dataset_id == clickhouse_table.id
 
     second_event_column_lineage = column_lineage[1]
-    assert second_event_column_lineage.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=timezone.utc)
+    assert second_event_column_lineage.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=UTC)
     assert second_event_column_lineage.operation_id == operation.id
     assert second_event_column_lineage.run_id == run.id
     assert second_event_column_lineage.job_id == run.job_id

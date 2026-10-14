@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2024-present MTS PJSC
 # SPDX-License-Identifier: Apache-2.0
 
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import Field
 
 from data_rentgen.openlineage.job_facets.base import OpenLineageJobFacet
 
 
-class OpenLineageJobProcessingType(str, Enum):
+class OpenLineageJobProcessingType(StrEnum):
     """Job processing type.
     See [JobTypeJobFacet](https://github.com/OpenLineage/OpenLineage/blob/main/spec/facets/JobTypeJobFacet.json).
     """

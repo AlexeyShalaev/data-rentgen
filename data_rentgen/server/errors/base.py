@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2024-present MTS PJSC
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Generic, TypeVar
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -12,8 +12,5 @@ class BaseErrorSchema(BaseModel):
     details: Any
 
 
-ErrorModel = TypeVar("ErrorModel", bound=BaseErrorSchema)
-
-
-class APIErrorSchema(BaseModel, Generic[ErrorModel]):
+class APIErrorSchema[ErrorModel: BaseErrorSchema](BaseModel):
     error: ErrorModel

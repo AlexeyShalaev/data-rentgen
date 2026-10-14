@@ -185,7 +185,7 @@ class DatabaseSaver:
                         await self.unit_of_work.run.create(run_dto)
                     else:
                         await self.unit_of_work.run.update(run, run_dto)
-            except IntegrityError:  # noqa: PERF203
+            except IntegrityError:
                 # deadlock occurred, states in DB and RAM are out of sync,
                 # so we have to fetch run from DB
                 async with self.unit_of_work:

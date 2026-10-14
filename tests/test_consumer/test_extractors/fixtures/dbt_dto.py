@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID
 
 import pytest
@@ -59,8 +59,8 @@ def extracted_dbt_run(
         job=extracted_dbt_job,
         user=None,
         status=RunStatusDTO.SUCCEEDED,
-        started_at=datetime(2025, 5, 20, 8, 26, 55, 524789, tzinfo=timezone.utc),
-        ended_at=datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=timezone.utc),
+        started_at=datetime(2025, 5, 20, 8, 26, 55, 524789, tzinfo=UTC),
+        ended_at=datetime(2025, 5, 20, 8, 27, 20, 413075, tzinfo=UTC),
         external_id="93c69fcd-10d0-4639-a4f8-95be0da4476b",
     )
 
@@ -84,8 +84,8 @@ def extracted_dbt_operation(
         run=extracted_dbt_run,
         status=OperationStatusDTO.SUCCEEDED,
         type=OperationTypeDTO.BATCH,
-        started_at=datetime(2025, 5, 20, 8, 27, 16, 601799, tzinfo=timezone.utc),
-        ended_at=datetime(2025, 5, 20, 8, 27, 18, 581235, tzinfo=timezone.utc),
+        started_at=datetime(2025, 5, 20, 8, 27, 16, 601799, tzinfo=UTC),
+        ended_at=datetime(2025, 5, 20, 8, 27, 18, 581235, tzinfo=UTC),
         sql_query=extracted_dbt_sql_query,
     )
 

@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -158,7 +158,7 @@ def spark_outputs() -> list[OpenLineageOutputDataset]:
 
 @pytest.fixture
 def spark_app_run_event_start() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -193,7 +193,7 @@ def spark_app_run_event_start() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def spark_app_run_event_start_with_unknown_name() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -215,7 +215,7 @@ def spark_app_run_event_start_with_unknown_name() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def spark_app_run_event_start_with_unknown_name_and_parent() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -248,7 +248,7 @@ def spark_app_run_event_start_with_unknown_name_and_parent() -> OpenLineageRunEv
 
 @pytest.fixture
 def spark_another_app_run_event_start_with_unknown_name_and_different_parent() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 3, 38, 683800, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 3, 38, 683800, tzinfo=UTC)
     run_id = UUID("01908222-84bb-7fdf-ac0b-36892235c3db")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.START,
@@ -281,7 +281,7 @@ def spark_another_app_run_event_start_with_unknown_name_and_different_parent() -
 
 @pytest.fixture
 def spark_app_run_event_stop() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -303,7 +303,7 @@ def spark_app_run_event_stop() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def spark_app_run_event_stop_with_parent() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -336,7 +336,7 @@ def spark_app_run_event_stop_with_parent() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def spark_another_app_run_event_stop_with_another_parent() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 6, 15, 646000, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 6, 15, 646000, tzinfo=UTC)
     run_id = UUID("01908222-84bb-7fdf-ac0b-36892235c3db")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -369,7 +369,7 @@ def spark_another_app_run_event_stop_with_another_parent() -> OpenLineageRunEven
 
 @pytest.fixture
 def spark_operation_run_event_start() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910c-70d24f2898b1")
     return OpenLineageRunEvent(
@@ -414,7 +414,7 @@ def spark_operation_run_event_start() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def spark_operation_run_event_running() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 7, 9, 849000, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 7, 9, 849000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910c-70d24f2898b1")
     return OpenLineageRunEvent(
@@ -459,7 +459,7 @@ def spark_operation_run_event_running() -> OpenLineageRunEvent:
 
 @pytest.fixture
 def spark_operation_run_event_stop() -> OpenLineageRunEvent:
-    event_time = datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     operation_id = UUID("01908225-1fd7-746b-910c-70d24f2898b1")
     return OpenLineageRunEvent(

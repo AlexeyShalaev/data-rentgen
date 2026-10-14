@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import pytest
 from uuid6 import UUID
@@ -493,7 +493,7 @@ def test_extractors_extract_column_lineage_for_long_operations(
 ):
     # operation was created long time ago
     operation = extracted_spark_operation
-    operation.created_at = datetime(2024, 7, 5, tzinfo=timezone.utc)
+    operation.created_at = datetime(2024, 7, 5, tzinfo=UTC)
 
     column_lineage = GenericExtractor().extract_column_lineage(
         operation,

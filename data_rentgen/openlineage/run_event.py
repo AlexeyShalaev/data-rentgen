@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import Field
 
@@ -15,7 +15,7 @@ from data_rentgen.openlineage.job import OpenLineageJob
 from data_rentgen.openlineage.run import OpenLineageRun
 
 
-class OpenLineageRunEventType(str, Enum):
+class OpenLineageRunEventType(StrEnum):
     """Supported values of run eventType.
     See [RunEvent](https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json).
     """

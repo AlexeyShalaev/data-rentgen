@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import Field
 
@@ -13,7 +13,7 @@ from data_rentgen.openlineage.dataset_facets.base import (
 )
 
 
-class OpenLineageSymlinkType(str, Enum):
+class OpenLineageSymlinkType(StrEnum):
     """Dataset symlink type.
     See [SymlinksDatasetFacet](https://github.com/OpenLineage/OpenLineage/blob/main/spec/facets/SymlinksDatasetFacet.json).
     """

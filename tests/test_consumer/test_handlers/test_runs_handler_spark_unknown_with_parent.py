@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -128,7 +128,7 @@ async def test_runs_handler_spark_unknown_with_parent(
 
     task2_run = runs[0]
     assert task2_run.id == UUID("01908222-243b-7df2-a7ce-774296a65c3b")
-    assert task2_run.created_at == datetime(2024, 7, 5, 9, 3, 13, 979000, tzinfo=timezone.utc)
+    assert task2_run.created_at == datetime(2024, 7, 5, 9, 3, 13, 979000, tzinfo=UTC)
     assert task2_run.job_id == jobs[1].id
     assert task2_run.status == RunStatus.UNKNOWN
     assert task2_run.started_at is None
@@ -141,20 +141,20 @@ async def test_runs_handler_spark_unknown_with_parent(
 
     application2_run = runs[1]
     assert application2_run.id == UUID("01908222-84bb-7fdf-ac0b-36892235c3db")
-    assert application2_run.created_at == datetime(2024, 7, 5, 9, 3, 38, 683000, tzinfo=timezone.utc)
+    assert application2_run.created_at == datetime(2024, 7, 5, 9, 3, 38, 683000, tzinfo=UTC)
     assert application2_run.job_id == jobs[3].id
     assert application2_run.status == RunStatus.SUCCEEDED
-    assert application2_run.started_at == datetime(2024, 7, 5, 9, 3, 38, 683800, tzinfo=timezone.utc)
+    assert application2_run.started_at == datetime(2024, 7, 5, 9, 3, 38, 683800, tzinfo=UTC)
     assert application2_run.started_by_user is None
     assert application2_run.start_reason is None
-    assert application2_run.ended_at == datetime(2024, 7, 5, 9, 6, 15, 646000, tzinfo=timezone.utc)
+    assert application2_run.ended_at == datetime(2024, 7, 5, 9, 6, 15, 646000, tzinfo=UTC)
     assert application2_run.external_id is None
     assert application2_run.running_log_url is None
     assert application2_run.persistent_log_url is None
 
     task1_run = runs[2]
     assert task1_run.id == UUID("01908223-0782-7fc0-9d69-b1df9dac2c60")
-    assert task1_run.created_at == datetime(2024, 7, 5, 9, 4, 12, 162000, tzinfo=timezone.utc)
+    assert task1_run.created_at == datetime(2024, 7, 5, 9, 4, 12, 162000, tzinfo=UTC)
     assert task1_run.job_id == jobs[0].id
     assert task1_run.status == RunStatus.UNKNOWN
     assert task1_run.started_at is None
@@ -167,13 +167,13 @@ async def test_runs_handler_spark_unknown_with_parent(
 
     application1_run = runs[3]
     assert application1_run.id == UUID("01908224-8410-79a2-8de6-a769ad6944c9")
-    assert application1_run.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=timezone.utc)
+    assert application1_run.created_at == datetime(2024, 7, 5, 9, 5, 49, 584000, tzinfo=UTC)
     assert application1_run.job_id == jobs[2].id
     assert application1_run.status == RunStatus.SUCCEEDED
-    assert application1_run.started_at == datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=timezone.utc)
+    assert application1_run.started_at == datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=UTC)
     assert application1_run.started_by_user is None
     assert application1_run.start_reason is None
-    assert application1_run.ended_at == datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=timezone.utc)
+    assert application1_run.ended_at == datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=UTC)
     assert application1_run.external_id is None
     assert application1_run.running_log_url is None
     assert application1_run.persistent_log_url is None
@@ -194,14 +194,14 @@ async def test_runs_handler_spark_unknown_with_parent(
 
     job_operation = operations[0]
     assert job_operation.id == UUID("01908225-1fd7-746b-910c-70d24f2898b1")
-    assert job_operation.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=timezone.utc)
+    assert job_operation.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=UTC)
     assert job_operation.run_id == application1_run.id
     assert job_operation.name == "execute_save_into_data_source_command"
     assert job_operation.type == OperationType.BATCH
     assert job_operation.status == OperationStatus.SUCCEEDED
-    assert job_operation.started_at == datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc)
+    assert job_operation.started_at == datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC)
     assert job_operation.sql_query_id == operation_sql_query.id
-    assert job_operation.ended_at == datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=timezone.utc)
+    assert job_operation.ended_at == datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=UTC)
     assert job_operation.position == 3
     assert job_operation.description == "Hive -> Clickhouse"
 
@@ -276,7 +276,7 @@ async def test_runs_handler_spark_unknown_with_parent(
     assert len(inputs) == 1
 
     hive_input = inputs[0]
-    assert hive_input.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=timezone.utc)
+    assert hive_input.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=UTC)
     assert hive_input.operation_id == job_operation.id
     assert hive_input.run_id == application1_run.id
     assert hive_input.job_id == application1_run.job_id
@@ -292,7 +292,7 @@ async def test_runs_handler_spark_unknown_with_parent(
     assert len(outputs) == 1
 
     clickhouse_output = outputs[0]
-    assert clickhouse_output.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=timezone.utc)
+    assert clickhouse_output.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=UTC)
     assert clickhouse_output.operation_id == job_operation.id
     assert clickhouse_output.run_id == application1_run.id
     assert clickhouse_output.job_id == application1_run.job_id
@@ -312,7 +312,7 @@ async def test_runs_handler_spark_unknown_with_parent(
     assert len(column_lineage) == 2
 
     first_event_column_lineage = column_lineage[0]
-    assert first_event_column_lineage.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=timezone.utc)
+    assert first_event_column_lineage.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=UTC)
     assert first_event_column_lineage.operation_id == job_operation.id
     assert first_event_column_lineage.run_id == application1_run.id
     assert first_event_column_lineage.job_id == application1_run.job_id
@@ -320,7 +320,7 @@ async def test_runs_handler_spark_unknown_with_parent(
     assert first_event_column_lineage.target_dataset_id == clickhouse_table.id
 
     second_event_column_lineage = column_lineage[1]
-    assert second_event_column_lineage.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=timezone.utc)
+    assert second_event_column_lineage.created_at == datetime(2024, 7, 5, 9, 6, 29, 463000, tzinfo=UTC)
     assert second_event_column_lineage.operation_id == job_operation.id
     assert second_event_column_lineage.run_id == application1_run.id
     assert second_event_column_lineage.job_id == application1_run.job_id

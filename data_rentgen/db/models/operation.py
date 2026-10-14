@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from datetime import datetime
-from enum import Enum, IntEnum
+from enum import IntEnum, StrEnum
 from uuid import UUID
 
 from sqlalchemy import UUID as SQL_UUID
@@ -43,7 +43,7 @@ class OperationStatus(IntEnum):
     """Killed externally, e.g. by user request or in case of OOM"""
 
 
-class OperationType(str, Enum):
+class OperationType(StrEnum):
     BATCH = "BATCH"
     STREAMING = "STREAMING"
 

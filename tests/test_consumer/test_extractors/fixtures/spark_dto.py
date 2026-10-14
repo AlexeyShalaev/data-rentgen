@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID
 
 import pytest
@@ -99,8 +99,8 @@ def extracted_spark_app_run(
         job=extracted_spark_app_job,
         user=extracted_user,
         status=RunStatusDTO.SUCCEEDED,
-        started_at=datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=UTC),
         external_id="local-1719136537510",
         running_log_url="http://127.0.0.1:4040",
     )
@@ -118,8 +118,8 @@ def extracted_spark_app_run_with_parent(
         user=extracted_user,
         status=RunStatusDTO.SUCCEEDED,
         parent_run=extracted_airflow_task1_run_as_parent,
-        started_at=datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 4, 48, 794900, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 7, 15, 646000, tzinfo=UTC),
         external_id="local-1719136537510",
         running_log_url="http://127.0.0.1:4040",
     )
@@ -135,8 +135,8 @@ def extracted_spark_another_app_run_with_parent(
         job=extracted_spark_another_app_job_with_parent,
         status=RunStatusDTO.SUCCEEDED,
         parent_run=extracted_airflow_task2_run,
-        started_at=datetime(2024, 7, 5, 9, 3, 38, 683800, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 6, 15, 646000, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 3, 38, 683800, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 6, 15, 646000, tzinfo=UTC),
     )
 
 
@@ -150,8 +150,8 @@ def extracted_spark_operation(
         run=extracted_spark_app_run,
         status=OperationStatusDTO.SUCCEEDED,
         type=OperationTypeDTO.BATCH,
-        started_at=datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=UTC),
     )
 
 
@@ -165,8 +165,8 @@ def extracted_spark_operation_with_parent(
         run=extracted_spark_app_run_with_parent,
         status=OperationStatusDTO.SUCCEEDED,
         type=OperationTypeDTO.BATCH,
-        started_at=datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=timezone.utc),
-        ended_at=datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=timezone.utc),
+        started_at=datetime(2024, 7, 5, 9, 6, 29, 462000, tzinfo=UTC),
+        ended_at=datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=UTC),
     )
 
 

@@ -4,13 +4,10 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import Generic, TypeVar
-
-T = TypeVar("T")
 
 
 @dataclass(slots=True)
-class PaginationDTO(Generic[T]):
+class PaginationDTO[T]:
     items: list[T]
     page: int
     page_size: int

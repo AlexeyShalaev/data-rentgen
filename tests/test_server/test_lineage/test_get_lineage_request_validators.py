@@ -1,4 +1,4 @@
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from http import HTTPStatus
 
 import pytest
@@ -116,7 +116,7 @@ async def test_get_lineage_start_node_id_int_type_validation(
     test_client: AsyncClient,
     mocked_user: MockedUser,
 ):
-    since = datetime.now(tz=timezone.utc)
+    since = datetime.now(tz=UTC)
     response = await test_client.get(
         f"v1/{entity_kind}/lineage",
         headers={"Authorization": f"Bearer {mocked_user.access_token}"},
@@ -158,7 +158,7 @@ async def test_get_lineage_start_node_id_uuid_type_validation(
     test_client: AsyncClient,
     mocked_user: MockedUser,
 ):
-    since = datetime.now(tz=timezone.utc)
+    since = datetime.now(tz=UTC)
     response = await test_client.get(
         f"v1/{entity_kind}/lineage",
         headers={"Authorization": f"Bearer {mocked_user.access_token}"},
@@ -205,7 +205,7 @@ async def test_get_lineage_start_node_id_uuid_version_validation(
     test_client: AsyncClient,
     mocked_user: MockedUser,
 ):
-    since = datetime.now(tz=timezone.utc)
+    since = datetime.now(tz=UTC)
     response = await test_client.get(
         f"v1/{entity_kind}/lineage",
         headers={"Authorization": f"Bearer {mocked_user.access_token}"},
@@ -239,7 +239,7 @@ async def test_get_lineage_start_node_id_uuid_version_validation(
 
 
 async def test_get_lineage_until_less_than_since(test_client: AsyncClient, mocked_user: MockedUser):
-    since = datetime.now(tz=timezone.utc)
+    since = datetime.now(tz=UTC)
     until = since - timedelta(days=1)
 
     response = await test_client.get(
@@ -286,7 +286,7 @@ async def test_get_lineage_depth_out_of_bounds(
     error_message: str,
     context: dict,
 ):
-    since = datetime.now(tz=timezone.utc)
+    since = datetime.now(tz=UTC)
     response = await test_client.get(
         "v1/runs/lineage",
         headers={"Authorization": f"Bearer {mocked_user.access_token}"},

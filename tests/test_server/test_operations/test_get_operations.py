@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from http import HTTPStatus
 
 import pytest
@@ -60,7 +60,7 @@ async def test_get_operations_until_less_than_since(
     new_run: Run,
     mocked_user: MockedUser,
 ):
-    since = datetime.now(tz=timezone.utc)
+    since = datetime.now(tz=UTC)
     until = since - timedelta(days=1)
     response = await test_client.get(
         "v1/operations",

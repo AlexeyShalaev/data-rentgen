@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -32,10 +32,10 @@ from data_rentgen.openlineage.run_facets import (
 
 
 def test_extractors_extract_run_starrocks_query():
-    session_creation_time = datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=UTC)
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
-        eventTime=datetime(2026, 3, 31, 19, 40, 0, 456123, tzinfo=timezone.utc),
+        eventTime=datetime(2026, 3, 31, 19, 40, 0, 456123, tzinfo=UTC),
         job=OpenLineageJob(
             namespace="starrocks://some-starrocks:9030",
             name="insert_query",
@@ -88,8 +88,8 @@ def test_extractors_extract_run_starrocks_query():
     ],
 )
 def test_extractors_extract_run_starrocks_session(event_type: OpenLineageRunEventType, expected_status: RunStatusDTO):
-    session_creation_time = datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=timezone.utc)
-    session_end_time = datetime(2026, 3, 31, 19, 40, 0, 456000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2026, 3, 31, 19, 30, 0, 106000, tzinfo=UTC)
+    session_end_time = datetime(2026, 3, 31, 19, 40, 0, 456000, tzinfo=UTC)
     run = OpenLineageRunEvent(
         eventType=event_type,
         eventTime=session_end_time,

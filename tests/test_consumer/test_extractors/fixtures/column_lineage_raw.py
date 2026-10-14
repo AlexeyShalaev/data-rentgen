@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from uuid6 import UUID
@@ -328,7 +328,7 @@ def get_run_event_with_column_lineage(
     Args is: operation_id and column lineage facet, which will be add to outputs.
     Input is always PG dataset, output - hive dataset.
     """
-    event_time = datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=timezone.utc)
+    event_time = datetime(2024, 7, 5, 9, 7, 15, 642000, tzinfo=UTC)
     run_id = UUID("01908224-8410-79a2-8de6-a769ad6944c9")
     return OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.RUNNING,

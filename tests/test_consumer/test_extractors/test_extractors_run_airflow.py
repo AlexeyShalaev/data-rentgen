@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from packaging.version import Version
@@ -54,7 +54,7 @@ from data_rentgen.openlineage.run_facets.run_tags import OpenLineageRunTagsFacet
 
 
 def test_extractors_extract_run_airflow_dag_log_url_3_x_plus():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -83,8 +83,8 @@ def test_extractors_extract_run_airflow_dag_log_url_3_x_plus():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                 ),
                 tags=OpenLineageRunTagsFacet(
@@ -138,7 +138,7 @@ def test_extractors_extract_run_airflow_dag_log_url_3_x_plus():
 
 
 def test_extractors_extract_run_airflow_dag_log_url_2_3_plus():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -167,8 +167,8 @@ def test_extractors_extract_run_airflow_dag_log_url_2_3_plus():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                 ),
             ),
@@ -211,7 +211,7 @@ def test_extractors_extract_run_airflow_dag_log_url_2_3_plus():
 
 
 def test_extractors_extract_run_airflow_dag_log_url_2_x():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -240,8 +240,8 @@ def test_extractors_extract_run_airflow_dag_log_url_2_x():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                 ),
             ),
@@ -284,7 +284,7 @@ def test_extractors_extract_run_airflow_dag_log_url_2_x():
 
 
 def test_extractors_extract_run_airflow_task_log_url_preserve_original():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0e9b-7c52-9856-6cecfc842610")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -313,8 +313,8 @@ def test_extractors_extract_run_airflow_task_log_url_preserve_original():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -367,7 +367,7 @@ def test_extractors_extract_run_airflow_task_log_url_preserve_original():
 
 
 def test_extractors_extract_run_airflow_task_log_url_3_x():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0e9b-7c52-9856-6cecfc842610")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -396,8 +396,8 @@ def test_extractors_extract_run_airflow_task_log_url_3_x():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="backfill__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.BACKFILL_JOB,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -460,7 +460,7 @@ def test_extractors_extract_run_airflow_task_log_url_3_x():
 
 
 def test_extractors_extract_run_airflow_task_log_url_2_9_plus():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0e9b-7c52-9856-6cecfc842610")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -489,8 +489,8 @@ def test_extractors_extract_run_airflow_task_log_url_2_9_plus():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="backfill__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.BACKFILL_JOB,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -540,7 +540,7 @@ def test_extractors_extract_run_airflow_task_log_url_2_9_plus():
 
 
 def test_extractors_extract_run_airflow_task_log_url_2_x():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0e9b-7c52-9856-6cecfc842610")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -564,8 +564,8 @@ def test_extractors_extract_run_airflow_task_log_url_2_x():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -614,7 +614,7 @@ def test_extractors_extract_run_airflow_task_log_url_2_x():
     ],
 )
 def test_extractors_extract_run_airflow_dag_owner(owner: str, extracted_user: UserDTO | None):
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -643,8 +643,8 @@ def test_extractors_extract_run_airflow_dag_owner(owner: str, extracted_user: Us
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                 ),
             ),
@@ -696,7 +696,7 @@ def test_extractors_extract_run_airflow_dag_owner(owner: str, extracted_user: Us
     ],
 )
 def test_extractors_extract_run_airflow_task_owner(owner: str, extracted_user: UserDTO | None):
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -720,8 +720,8 @@ def test_extractors_extract_run_airflow_task_owner(owner: str, extracted_user: U
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -761,7 +761,7 @@ def test_extractors_extract_run_airflow_task_owner(owner: str, extracted_user: U
 
 
 def test_extractors_extract_run_airflow_3_x_task_map_index():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -790,8 +790,8 @@ def test_extractors_extract_run_airflow_3_x_task_map_index():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -855,7 +855,7 @@ def test_extractors_extract_run_airflow_3_x_task_map_index():
 
 
 def test_extractors_extract_run_airflow_2_x_task_map_index():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -879,8 +879,8 @@ def test_extractors_extract_run_airflow_2_x_task_map_index():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -921,7 +921,7 @@ def test_extractors_extract_run_airflow_2_x_task_map_index():
 
 
 def test_extractors_extract_run_airflow_dag_tags_2_10_x_plus():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -974,8 +974,8 @@ def test_extractors_extract_run_airflow_dag_tags_2_10_x_plus():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                 ),
                 tags=OpenLineageRunTagsFacet(
@@ -1066,7 +1066,7 @@ def test_extractors_extract_run_airflow_dag_tags_2_10_x_plus():
     ],
 )
 def test_extractors_extract_run_airflow_dag_tags_below_2_10(tags: list[str] | str):
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -1095,8 +1095,8 @@ def test_extractors_extract_run_airflow_dag_tags_below_2_10(tags: list[str] | st
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="manual__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.MANUAL,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                 ),
             ),
@@ -1144,7 +1144,7 @@ def test_extractors_extract_run_airflow_dag_tags_below_2_10(tags: list[str] | st
 
 
 def test_extractors_extract_run_airflow_task_tags_2_10_x_plus():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -1197,8 +1197,8 @@ def test_extractors_extract_run_airflow_task_tags_2_10_x_plus():
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -1296,7 +1296,7 @@ def test_extractors_extract_run_airflow_task_tags_2_10_x_plus():
     ],
 )
 def test_extractors_extract_run_airflow_task_tags_below_2_10(tags: list[str] | str):
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -1325,8 +1325,8 @@ def test_extractors_extract_run_airflow_task_tags_below_2_10(tags: list[str] | s
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -1384,22 +1384,22 @@ def test_extractors_extract_run_airflow_task_tags_below_2_10(tags: list[str] | s
     ["start_time", "end_time", "expected_start_at", "expected_end_at"],
     [
         (
-            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
             None,
-            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-            None,
-        ),
-        (
-            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
             None,
         ),
         (
-            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-            datetime(2024, 7, 5, 9, 4, 31, 979349, tzinfo=timezone.utc),
-            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-            datetime(2024, 7, 5, 9, 4, 31, 979349, tzinfo=timezone.utc),
+            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+            None,
+        ),
+        (
+            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+            datetime(2024, 7, 5, 9, 4, 31, 979349, tzinfo=UTC),
+            datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+            datetime(2024, 7, 5, 9, 4, 31, 979349, tzinfo=UTC),
         ),
     ],
 )
@@ -1409,7 +1409,7 @@ def test_extractors_extract_run_airflow_task_nominal_times(
     expected_start_at: datetime | None,
     expected_end_at: datetime | None,
 ):
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -1438,8 +1438,8 @@ def test_extractors_extract_run_airflow_task_nominal_times(
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -1496,7 +1496,7 @@ def test_extractors_extract_run_airflow_task_nominal_times(
 
 def test_extractors_extract_run_airflow_task_job_dependencies_ol_provider_2_10_plus():
     # https://github.com/apache/airflow/pull/59521
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -1525,8 +1525,8 @@ def test_extractors_extract_run_airflow_task_job_dependencies_ol_provider_2_10_p
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",
@@ -1666,7 +1666,7 @@ def test_extractors_extract_run_airflow_task_job_dependencies_ol_provider_2_10_p
 
 
 def test_extractors_extract_run_airflow_task_job_dependencies_ol_provider_below_2_10():
-    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc)
+    now = datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC)
     run_id = UUID("01908223-0782-79b8-9495-b1c38aaee839")
     run = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,
@@ -1695,8 +1695,8 @@ def test_extractors_extract_run_airflow_task_job_dependencies_ol_provider_below_
                     dagRun=OpenLineageAirflowDagRunInfo(
                         run_id="scheduled__2024-07-05T09:04:13:979349+00:00",
                         run_type=OpenLineageAirflowDagRunType.SCHEDULED,
-                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
-                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=timezone.utc),
+                        data_interval_start=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
+                        data_interval_end=datetime(2024, 7, 5, 9, 4, 13, 979349, tzinfo=UTC),
                     ),
                     task=OpenLineageAirflowTaskInfo(
                         task_id="mytask",

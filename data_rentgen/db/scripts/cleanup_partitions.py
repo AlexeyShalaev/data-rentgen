@@ -12,7 +12,7 @@ from argparse import ArgumentParser
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import UTC, date, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Literal
 
 from dateutil.parser import isoparse
@@ -53,7 +53,7 @@ granularity_output_format = {
 }
 
 
-class Command(str, Enum):
+class Command(StrEnum):
     DRY_RUN = "dry_run"
     DETACH = "detach"
     TRUNCATE = "truncate"

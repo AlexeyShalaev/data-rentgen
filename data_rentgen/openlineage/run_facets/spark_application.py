@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2024-present MTS PJSC
 # SPDX-License-Identifier: Apache-2.0
 
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import Field
 
 from data_rentgen.openlineage.run_facets.base import OpenLineageRunFacet
 
 
-class OpenLineageSparkDeployMode(str, Enum):
+class OpenLineageSparkDeployMode(StrEnum):
     """Spark application deploy mode."""
 
     CLIENT = "client"

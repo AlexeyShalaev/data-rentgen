@@ -2,13 +2,9 @@
 # SPDX-License-Identifier: Apache-2.0
 from __future__ import annotations
 
-from typing import Generic, TypeVar
-
 from pydantic import BaseModel, ConfigDict, Field
 
 from data_rentgen.dto.pagination import PaginationDTO
-
-T = TypeVar("T", bound=BaseModel)
 
 
 class PageMetaResponseV1(BaseModel):
@@ -33,7 +29,7 @@ class PaginateQueryV1(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
-class PageResponseV1(BaseModel, Generic[T]):
+class PageResponseV1[T: BaseModel](BaseModel):
     """Page response."""
 
     meta: PageMetaResponseV1 = Field(description="Page metadata")

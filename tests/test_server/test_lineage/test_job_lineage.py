@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from http import HTTPStatus
 
 import pytest
@@ -55,7 +55,7 @@ async def test_get_job_lineage_via_personal_token_is_allowed(
         "v1/jobs/lineage",
         headers={"Authorization": f"Bearer {mocked_user.personal_token}"},
         params={
-            "since": datetime.now(tz=timezone.utc).isoformat(),
+            "since": datetime.now(tz=UTC).isoformat(),
             "start_node_id": job.id,
         },
     )
@@ -73,7 +73,7 @@ async def test_get_job_lineage_no_runs(
         "v1/jobs/lineage",
         headers={"Authorization": f"Bearer {mocked_user.access_token}"},
         params={
-            "since": datetime.now(tz=timezone.utc).isoformat(),
+            "since": datetime.now(tz=UTC).isoformat(),
             "start_node_id": job.id,
         },
     )

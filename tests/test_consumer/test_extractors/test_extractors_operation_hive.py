@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from uuid6 import UUID
 
@@ -37,10 +37,10 @@ from data_rentgen.openlineage.run_facets import (
 
 
 def test_extractors_extract_operation_hive_job():
-    now = datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=timezone.utc)
+    now = datetime(2025, 6, 18, 13, 32, 10, 30000, tzinfo=UTC)
     operation_id = UUID("0197833d-6cec-7609-a80f-8f4e0f8a5b1f")
 
-    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=timezone.utc)
+    session_creation_time = datetime(2025, 6, 18, 13, 32, 3, 229000, tzinfo=UTC)
 
     operation = OpenLineageRunEvent(
         eventType=OpenLineageRunEventType.COMPLETE,

@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -98,13 +98,13 @@ async def test_runs_handler_flink(
 
     run = runs[0]
     assert run.id == UUID("01965ca5-85bc-789d-93a1-9e4e48bd37b3")
-    assert run.created_at == datetime(2025, 4, 22, 8, 37, 53, 724000, tzinfo=timezone.utc)
+    assert run.created_at == datetime(2025, 4, 22, 8, 37, 53, 724000, tzinfo=UTC)
     assert run.job_id == jobs[0].id
     assert run.status == RunStatus.SUCCEEDED
-    assert run.started_at == datetime(2025, 4, 22, 8, 37, 53, 938068, tzinfo=timezone.utc)
+    assert run.started_at == datetime(2025, 4, 22, 8, 37, 53, 938068, tzinfo=UTC)
     assert run.started_by_user is None
     assert run.start_reason is None
-    assert run.ended_at == datetime(2025, 4, 22, 8, 39, 53, 938068, tzinfo=timezone.utc)
+    assert run.ended_at == datetime(2025, 4, 22, 8, 39, 53, 938068, tzinfo=UTC)
     assert run.external_id == "b825f524-49d6-4dd8-bffd-3e5742c528d0"
     assert run.running_log_url == "http://localhost:18081/#/job/running/b825f524-49d6-4dd8-bffd-3e5742c528d0"
     assert run.persistent_log_url == "http://localhost:18081/#/job/completed/b825f524-49d6-4dd8-bffd-3e5742c528d0"
@@ -116,14 +116,14 @@ async def test_runs_handler_flink(
 
     operation = operations[0]
     assert operation.id == UUID("01965ca5-85bc-789d-93a1-9e4e48bd37b3")
-    assert operation.created_at == datetime(2025, 4, 22, 8, 37, 53, 724000, tzinfo=timezone.utc)
+    assert operation.created_at == datetime(2025, 4, 22, 8, 37, 53, 724000, tzinfo=UTC)
     assert operation.run_id == run.id
     assert operation.name == "insert-into_default_catalog.default_database.kafka_output"
     assert operation.type == OperationType.STREAMING
     assert operation.status == OperationStatus.SUCCEEDED
-    assert operation.started_at == datetime(2025, 4, 22, 8, 37, 53, 938068, tzinfo=timezone.utc)
+    assert operation.started_at == datetime(2025, 4, 22, 8, 37, 53, 938068, tzinfo=UTC)
     assert operation.sql_query_id is None
-    assert operation.ended_at == datetime(2025, 4, 22, 8, 39, 53, 938068, tzinfo=timezone.utc)
+    assert operation.ended_at == datetime(2025, 4, 22, 8, 39, 53, 938068, tzinfo=UTC)
     assert operation.position is None
     assert operation.description is None
 
@@ -221,7 +221,7 @@ async def test_runs_handler_flink(
     assert len(inputs) == 1
 
     kafka_input = inputs[0]
-    assert kafka_input.created_at == datetime(2025, 4, 22, 8, 37, 53, 724000, tzinfo=timezone.utc)
+    assert kafka_input.created_at == datetime(2025, 4, 22, 8, 37, 53, 724000, tzinfo=UTC)
     assert kafka_input.operation_id == operation.id
     assert kafka_input.run_id == run.id
     assert kafka_input.job_id == run.job_id
@@ -237,7 +237,7 @@ async def test_runs_handler_flink(
     assert len(outputs) == 1
 
     kafka_output = outputs[0]
-    assert kafka_output.created_at == datetime(2025, 4, 22, 8, 37, 53, 724000, tzinfo=timezone.utc)
+    assert kafka_output.created_at == datetime(2025, 4, 22, 8, 37, 53, 724000, tzinfo=UTC)
     assert kafka_output.operation_id == operation.id
     assert kafka_output.run_id == run.id
     assert kafka_output.job_id == run.job_id
