@@ -24,7 +24,7 @@ from sqlalchemy import (
     union,
 )
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import selectinload
+from sqlalchemy.orm import joinedload, selectinload
 
 from data_rentgen.db.models import Address, Dataset, Location, TagValue
 from data_rentgen.db.models.dataset import DatasetTagValue
@@ -54,8 +54,10 @@ get_list_query = (
     .where(Dataset.id == any_(bindparam("dataset_ids")))
     .order_by(Dataset.id)
     .limit(bindparam("limit"))
-    .options(selectinload(Dataset.location).selectinload(Location.addresses))
-    .options(selectinload(Dataset.tag_values).selectinload(TagValue.tag))
+    .options(
+        joinedload(Dataset.location).selectinload(Location.addresses),
+        selectinload(Dataset.tag_values).joinedload(TagValue.tag),
+    )
 )
 
 get_one_query = (
@@ -233,7 +235,7 @@ class DatasetRepository(Repository[Dataset]):
 
         options = [
             selectinload(Dataset.location).selectinload(Location.addresses),
-            selectinload(Dataset.tag_values).selectinload(TagValue.tag),
+            selectinload(Dataset.tag_values).joinedload(TagValue.tag),
         ]
         return await self._paginate_by_query(
             query=query,

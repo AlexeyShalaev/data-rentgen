@@ -16,7 +16,7 @@ from sqlalchemy import (
     union,
 )
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import aliased, selectinload
+from sqlalchemy.orm import aliased, contains_eager, joinedload, selectinload
 
 from data_rentgen.db.models import Job, Location, Run, RunStartReason, RunStatus, User
 from data_rentgen.db.repositories.base import Repository
@@ -36,20 +36,24 @@ get_list_by_id_query = (
     )
     .limit(bindparam("limit"))
     .order_by(Run.id)
-    .options(selectinload(Run.job).joinedload(Job.location).selectinload(Location.addresses))
-    .options(selectinload(Run.started_by_user))
+    .options(
+        joinedload(Run.job).joinedload(Job.location).selectinload(Location.addresses), joinedload(Run.started_by_user)
+    )
 )
 
 get_list_by_job_ids_query = (
     select(Run)
+    .join(Run.job)
     .where(
         Run.id >= bindparam("min_id"),
         Run.created_at >= bindparam("since"),
         Run.job_id == any_(bindparam("job_ids")),
     )
     .order_by(Run.id)
-    .options(selectinload(Run.job).joinedload(Job.location).selectinload(Location.addresses))
-    .options(selectinload(Run.started_by_user))
+    .options(
+        contains_eager(Run.job).joinedload(Job.location).selectinload(Location.addresses),
+        joinedload(Run.started_by_user),
+    )
 )
 
 fetch_bulk_query = (

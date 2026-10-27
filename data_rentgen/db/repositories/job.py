@@ -27,7 +27,7 @@ from sqlalchemy import (
     union,
 )
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import selectinload
+from sqlalchemy.orm import joinedload, selectinload
 
 from data_rentgen.db.models import Address, Job, JobLastRun, JobTagValue, Location, TagValue
 from data_rentgen.db.repositories.base import Repository
@@ -65,7 +65,7 @@ get_list_query = (
     .where(Job.id == any_(bindparam("job_ids")))
     .order_by(Job.id)
     .limit(bindparam("limit"))
-    .options(selectinload(Job.location).selectinload(Location.addresses))
+    .options(joinedload(Job.location).selectinload(Location.addresses))
 )
 
 get_stats_query = (
@@ -224,8 +224,8 @@ class JobRepository(Repository[Job]):
 
         options = [
             selectinload(Job.location).selectinload(Location.addresses),
-            selectinload(Job.tag_values).selectinload(TagValue.tag),
-            selectinload(Job.last_run).selectinload(JobLastRun.started_by_user),  # type: ignore[attr-defined]
+            selectinload(Job.tag_values).joinedload(TagValue.tag),
+            selectinload(Job.last_run).joinedload(JobLastRun.started_by_user),  # type: ignore[attr-defined]
         ]
         return await self._paginate_by_query(
             query=query,
