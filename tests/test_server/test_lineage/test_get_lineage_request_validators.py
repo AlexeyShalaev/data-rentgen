@@ -47,8 +47,6 @@ async def test_get_lineage_no_filter(
             "message": "Invalid request",
         },
     }
-    if granularity:
-        [detail["input"].update({"granularity": granularity}) for detail in expected_response["error"]["details"]]
 
     response = await test_client.get(
         f"v1/{entity_kind}/lineage",
