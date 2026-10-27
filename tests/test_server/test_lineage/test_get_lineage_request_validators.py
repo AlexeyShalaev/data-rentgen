@@ -32,14 +32,14 @@ async def test_get_lineage_no_filter(
                 {
                     "code": "missing",
                     "context": {},
-                    "input": {"depth": 1, "direction": "BOTH", "include_column_lineage": False},
+                    "input": {},
                     "location": ["query", "since"],
                     "message": "Field required",
                 },
                 {
                     "code": "missing",
                     "context": {},
-                    "input": {"depth": 1, "direction": "BOTH", "include_column_lineage": False},
+                    "input": {},
                     "location": ["query", "start_node_id"],
                     "message": "Field required",
                 },
@@ -181,9 +181,7 @@ async def test_get_lineage_start_node_id_uuid_type_validation(
                         "query",
                         "start_node_id",
                     ],
-                    "message": (
-                        "Input should be a valid UUID, invalid length: expected length 32 for simple format, found 1"
-                    ),
+                    "message": ("Input should be a valid UUID, invalid length: found 1"),
                 },
             ],
             "message": "Invalid request",
