@@ -132,7 +132,7 @@ class DatasetRepository(Repository[Dataset]):
     async def _create(self, dataset: DatasetDTO) -> Dataset:
         result = Dataset(location_id=dataset.location.id, name=dataset.name)
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result
 
     async def update(self, existing: Dataset, new: DatasetDTO) -> Dataset:

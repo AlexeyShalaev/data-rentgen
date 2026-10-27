@@ -359,7 +359,7 @@ class RunRepository(Repository[Run]):
             expected_end_at=run.expected_end_at,
         )
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result
 
     async def update(
@@ -391,7 +391,7 @@ class RunRepository(Repository[Run]):
             if value is not None:
                 setattr(existing, col_name, value)
 
-        await self._session.flush([existing])
+        await self._session.flush()
         return existing
 
     async def create_or_update_bulk(self, runs: list[RunDTO]) -> None:

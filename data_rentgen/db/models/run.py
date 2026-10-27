@@ -17,7 +17,7 @@ from sqlalchemy import (
     String,
     select,
 )
-from sqlalchemy.dialects.postgresql import TSVECTOR
+from sqlalchemy.dialects.postgresql import TSVECTOR, distinct_on
 from sqlalchemy.orm import Mapped, aliased, foreign, mapped_column, relationship
 from sqlalchemy_utils import ChoiceType
 
@@ -196,7 +196,10 @@ class Run(Base):
 
 # DISTINCT ON is much more efficiend than (run_id == last(run_id) PARTITION BY job_id)
 last_run_query = (
-    select(Run).distinct(Run.job_id).order_by(Run.job_id.asc(), Run.id.desc(), Run.created_at.desc()).alias("last_run")
+    select(Run)
+    .ext(distinct_on(Run.job_id))
+    .order_by(Run.job_id.asc(), Run.id.desc(), Run.created_at.desc())
+    .alias("last_run")
 )
 JobLastRun = aliased(Run, last_run_query, flat=True)
 Job.last_run = relationship(

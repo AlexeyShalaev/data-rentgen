@@ -282,7 +282,7 @@ class JobRepository(Repository[Job]):
             type_id=(job.type or JobTypeDTO.UNKNOWN).id,
         )
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result
 
     async def update(self, existing: Job, new: JobDTO) -> Job:
@@ -291,7 +291,7 @@ class JobRepository(Repository[Job]):
         if new.parent_job:
             existing.parent_job_id = new.parent_job.id
 
-        await self._session.flush([existing])
+        await self._session.flush()
         if not new.tag_values:
             # in case when jobs have no tag values we can avoid INSERT statements.
             # also parent jobs may have no tag values, so we skip updating them.

@@ -69,5 +69,5 @@ class SchemaRepository(Repository[Schema]):
     async def _create(self, schema: SchemaDTO) -> Schema:
         result = Schema(digest=schema.digest, fields=schema.fields)
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result

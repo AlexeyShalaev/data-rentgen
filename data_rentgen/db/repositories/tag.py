@@ -108,5 +108,5 @@ class TagRepository(Repository[Tag]):
     async def _create(self, tag: TagDTO) -> Tag:
         result = Tag(name=tag.name)
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result

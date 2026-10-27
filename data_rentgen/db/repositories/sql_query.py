@@ -58,5 +58,5 @@ class SQLQueryRepository(Repository[SQLQuery]):
     async def _create(self, sql_query: SQLQueryDTO) -> SQLQuery:
         result = SQLQuery(fingerprint=sql_query.fingerprint, query=sql_query.query)
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result

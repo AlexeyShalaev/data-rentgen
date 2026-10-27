@@ -66,7 +66,7 @@ class UserRepository(Repository[User]):
     async def _create(self, user: UserDTO) -> User:
         result = User(name=user.name)
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result
 
     async def read_by_id(self, id_: int) -> User | None:

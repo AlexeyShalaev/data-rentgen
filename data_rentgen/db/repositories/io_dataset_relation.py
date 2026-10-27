@@ -6,6 +6,7 @@ from datetime import datetime
 from typing import Literal
 
 from sqlalchemy import and_, any_, column, func, select
+from sqlalchemy.dialects.postgresql import distinct_on
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from data_rentgen.db.models import Input, Output, Schema
@@ -69,7 +70,7 @@ class IODatasetRelationRepository:
                 window(func.first_value(Input.schema_id)).label("oldest_input_schema_id"),
                 window(func.last_value(Input.schema_id)).label("newest_input_schema_id"),
             )
-            .distinct(*distinct_columns)
+            .ext(distinct_on(*distinct_columns))
             .join(
                 Input,
                 and_(

@@ -8,7 +8,7 @@ from uuid import UUID
 
 from sqlalchemy import UUID as SQL_UUID
 from sqlalchemy import ColumnElement, Row, Select, Subquery, any_, func, literal, select
-from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.dialects.postgresql import distinct_on, insert
 
 from data_rentgen.db.models import Output, OutputType, Schema
 from data_rentgen.db.repositories.base import Repository
@@ -180,7 +180,7 @@ class OutputRepository(Repository[Output]):
                 window(func.first_value(Output.schema_id)).label("oldest_schema_id"),
                 window(func.last_value(Output.schema_id)).label("newest_schema_id"),
             )
-            .distinct(*partition_columns)
+            .ext(distinct_on(*partition_columns))
             .where(*where)
         )
 

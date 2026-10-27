@@ -75,5 +75,5 @@ class TagValueRepository(Repository[TagValue]):
     async def _create(self, tag_value: TagValueDTO) -> TagValue:
         result = TagValue(tag_id=tag_value.tag.id, value=tag_value.value)
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result

@@ -8,7 +8,7 @@ from sqlalchemy import (
     literal,
     select,
 )
-from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.dialects.postgresql import distinct_on, insert
 
 from data_rentgen.db.models import JobType
 from data_rentgen.db.repositories.base import Repository
@@ -30,7 +30,7 @@ get_one_query = (
     .limit(literal(1, literal_execute=True))
 )
 
-get_distinct_query = select(JobType.type).distinct(JobType.type).order_by(JobType.type)
+get_distinct_query = select(JobType.type).ext(distinct_on(JobType.type)).order_by(JobType.type)
 insert_query = insert(JobType).on_conflict_do_nothing(index_elements=["type"])
 
 

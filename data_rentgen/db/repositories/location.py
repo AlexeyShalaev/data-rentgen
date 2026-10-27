@@ -16,7 +16,7 @@ from sqlalchemy import (
     select,
     union,
 )
-from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.dialects.postgresql import distinct_on, insert
 from sqlalchemy.orm import selectinload
 
 from data_rentgen.db.models import Address, Location
@@ -44,7 +44,7 @@ get_one_query = (
     )
     .options(selectinload(Location.addresses))
 )
-get_distinct_query = select(Location.type).distinct(Location.type).order_by(Location.type)
+get_distinct_query = select(Location.type).ext(distinct_on(Location.type)).order_by(Location.type)
 
 insert_address_query = (
     insert(Address)
@@ -118,7 +118,7 @@ class LocationRepository(Repository[Location]):
         if not location:
             raise EntityNotFoundError("Location", "id", location_id)  # noqa: EM101
         location.external_id = external_id
-        await self._session.flush([location])
+        await self._session.flush()
         return location
 
     async def create_or_update(self, location: LocationDTO) -> Location:
@@ -148,7 +148,7 @@ class LocationRepository(Repository[Location]):
     async def _create(self, location: LocationDTO) -> Location:
         result = Location(type=location.type, name=location.name)
         self._session.add(result)
-        await self._session.flush([result])
+        await self._session.flush()
         return result
 
     async def _update_addresses(self, existing: Location, new: LocationDTO) -> Location:

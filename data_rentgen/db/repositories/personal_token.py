@@ -5,6 +5,7 @@ from datetime import UTC, date, datetime
 from uuid import UUID
 
 from sqlalchemy import any_, bindparam, literal, select
+from sqlalchemy.dialects.postgresql import distinct_on
 from sqlalchemy.exc import IntegrityError
 
 from data_rentgen.db.models import PersonalToken
@@ -45,7 +46,7 @@ class PersonalTokenRepository(Repository[PersonalToken]):
             where.append(PersonalToken.id == any_(list(personal_token_ids)))  # type: ignore[arg-type]
             limit = len(personal_token_ids)
 
-        query = select(PersonalToken).distinct(PersonalToken.name).where(*where)
+        query = select(PersonalToken).ext(distinct_on(PersonalToken.name)).where(*where)
 
         return await self._paginate_by_query(
             query=query,
@@ -85,7 +86,7 @@ class PersonalTokenRepository(Repository[PersonalToken]):
         )
         self._session.add(result)
         try:
-            await self._session.flush([result])
+            await self._session.flush()
         except IntegrityError as e:
             constraint = e.__cause__.__cause__.constraint_name  # type: ignore[union-attr]
             if constraint == "uq__personal_token__user_id_since_until_name":
@@ -97,5 +98,5 @@ class PersonalTokenRepository(Repository[PersonalToken]):
 
     async def revoke(self, user_token: PersonalToken) -> PersonalToken:
         user_token.revoked_at = datetime.now(tz=UTC)
-        await self._session.flush([user_token])
+        await self._session.flush()
         return user_token
