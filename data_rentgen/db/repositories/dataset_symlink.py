@@ -14,7 +14,8 @@ from data_rentgen.db.repositories.base import Repository
 from data_rentgen.dto import DatasetSymlinkGroupDTO
 
 get_fingerprints_query = (
-    select(DatasetSymlinkGroup.fingerprint.distinct())
+    select(DatasetSymlinkGroup.fingerprint)
+    .distinct()
     .where(
         DatasetSymlinkGroup.fingerprint == any_(bindparam("fingerprints")),
     )

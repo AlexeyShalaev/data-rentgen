@@ -15,7 +15,8 @@ from data_rentgen.db.repositories.base import Repository
 from data_rentgen.dto import ColumnLineageDTO
 
 get_fingerprints_query = (
-    select(DatasetColumnRelation.fingerprint.distinct())
+    select(DatasetColumnRelation.fingerprint)
+    .distinct()
     .where(DatasetColumnRelation.fingerprint == any_(bindparam("fingerprints")))
     .limit(bindparam("limit"))
 )

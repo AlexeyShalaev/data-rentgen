@@ -34,8 +34,8 @@ class OpenLineageColumnLineageDatasetFacetField(OpenLineageBase):
     """Dataset facet describing column lineage for specific field."""
 
     inputFields: list[OpenLineageColumnLineageDatasetFacetFieldRef] = Field(default_factory=list)
-    transformationDescription: str | None = Field(default=None, deprecated=True)
-    transformationType: str | None = Field(default=None, deprecated=True)
+    transformationDescription: str | None = Field(default=None, json_schema_extra={"deprecated": True})
+    transformationType: str | None = Field(default=None, json_schema_extra={"deprecated": True})
 
 
 class OpenLineageColumnLineageDatasetFacet(OpenLineageDatasetFacet):
